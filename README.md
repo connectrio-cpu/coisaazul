@@ -30,7 +30,7 @@ A análise inicial consistiu em mapear o comportamento padrão (baseline) do amb
   `net user /add A1berto paw0rd1`
 
 * **Query de Baseline (Processos mais comuns):**
-```splunk
+'''splunk
   index=windowslogs | top Image
 
     Análise Técnica: O processo legítimo C:\windows\system32\svchost.exe foi identificado no topo da atividade com 1.642 ocorrências (38.8% do volume de logs), o que se enquadra na atividade normal do sistema operacional.
@@ -93,5 +93,5 @@ index=vpnlogs
 Nota: Este projeto faz parte do meu desenvolvimento contínuo em Security Operations e Threat Hunting.
 
 * **Query de Baseline (Processos mais comuns):**
-```splunk
+'''splunk
   index=windowslogs | top Image
