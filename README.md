@@ -37,7 +37,7 @@ A análise inicial consistiu em mapear o comportamento padrão (baseline) do amb
 
     Nota de Aprendizado: Durante a execução, observamos a estrita necessidade de seguir a regra case-sensitive do Splunk. A busca pelo campo em minúsculo (image) falhou (retornando No results found), exigindo a correção imediata para o padrão indexado (Image).
 
-2. Enriquecimento de Dados & Threat Intelligence
+### **2. Enriquecimento de Dados & Threat Intelligence**
 
 Para acelerar a triagem de alertas no SOC, utilizei técnicas de cruzamento de dados nativas do Splunk para correlacionar indicadores brutos com inteligência de ameaças.
 A. Análise de Risco com Tabelas de Lookup Externalizadas
@@ -62,7 +62,7 @@ index=windowslogs | iplocation SourceIp | stats count by Region
 
     Resultado: Identificação de um volume anômalo de conexões concentrado na região da California, validando a necessidade de isolamento de rede do IP de origem.
 
-3. Detecção Avançada de Anomalias (UBA)
+### **3. Detecção Avançada de Anomalias (UBA)**
 
 Na última fase, o foco mudou para a análise do comportamento dos usuários em logs de VPN (index=vpnlogs). Foi implementada uma query avançada utilizando Z-Score para calcular desvios-padrão de comportamento e isolar outliers de horário de login.
 Snippet de código
@@ -76,13 +76,13 @@ index=vpnlogs
 | table _time user src_ip src_country hour typical_hour stdev_hour zscore
 | sort - hour_zscore
 
-🚨 Achados Críticos (Outliers Detectados):
+### 🚨 Achados Críticos (Outliers Detectados):
 
     Desvio de Perfil Horário (njackson): O usuário autenticou-se na VPN às 03:17 da manhã (hour = 3.28), sendo que o seu horário típico histórico de acesso registrado era às 13:50 (typical_hour = 13.50). Essa ação gerou um Z-Score de 5.49, classificando o evento como uma anomalia comportamental grave (potencial comprometimento de credencial).
 
     Desvio de Origem Geográfica (jsmith): Identificação de login bem-sucedido a partir de um país completamente anômalo ao histórico padrão do colaborador.
 
-🎯 Conclusões e Aprendizados
+### 🎯 Conclusões e Aprendizados
 
     Estrutura de Sintaxe: Consolidação do entendimento sobre o comportamento case-sensitive do Splunk e a necessidade de validação estrita de strings na construção de regras de detecção.
 
